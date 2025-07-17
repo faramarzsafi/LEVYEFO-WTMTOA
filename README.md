@@ -1,98 +1,97 @@
+
 # LEVYEFO-WTMTOA: A Hybrid Optimization Algorithm
 
-This repository provides the implementation of **LEVYEFO-WTMTOA**, a novel hybrid metaheuristic that integrates:
+This repository provides the official implementation of **LEVYEFO-WTMTOA**, a novel hybrid metaheuristic for solving complex engineering and global optimization problems. It combines the strengths of:
 
-- **Multi-Tracker Optimization Algorithm (MTOA)**  
-- **Electromagnetic Field Optimization (EFO)**  
-- Enhanced with **Levy Flights** and **Morlet Wavelet Transform**
-
-📄 Published in *The Journal of Supercomputing* (Springer, 2025)  
-🔗 [DOI: 10.1007/s11227-024-06856-6](https://link.springer.com/article/10.1007/s11227-024-06856-6)
+- 🧭 **Multi-Tracker Optimization Algorithm (MTOA)**
+- 🌐 **Electromagnetic Field Optimization (EFO)**
+- 🔀 **Levy Flights** for stochastic jumps
+- 📉 **Morlet Wavelet Transform** for adaptive search radius control
 
 ---
 
-## 🧠 Algorithm Highlights
+## 📄 Publication
 
-LEVYEFO-WTMTOA addresses key optimization challenges:
+📘 *The Journal of Supercomputing*, Springer Nature, 2025  
+📝 DOI: [10.1007/s11227-024-06856-6](https://doi.org/10.1007/s11227-024-06856-6)  
+📤 Volume 81, Article 432
 
-- Escapes **local optima** using Levy flights  
-- Balances **exploration vs. exploitation** with EFO dynamics  
-- Refines solutions through **MTOA’s GT–LT hierarchy**
-- Adapts search radius dynamically using **Morlet wavelet transforms**
+---
 
-The hybrid framework significantly improves convergence in complex engineering and benchmark scenarios.
+## 🧠 Algorithm Summary
+
+**LEVYEFO-WTMTOA** overcomes challenges in high-dimensional optimization by:
+
+- Escaping local optima with **Levy flights**
+- Dynamically balancing **exploration and exploitation**
+- Refining local solutions through **GT–LT** structure in MTOA
+- Adjusting search space using **Morlet wavelets**
+
+It is benchmarked on the CEC2018 functions and tested on **spring design** and **welded beam** engineering problems.
 
 ---
 
 ## 📦 Repository Contents
 
-```
-📦MTOA_project
-├── IMTOA_DP3.m               # Main algorithm script
-├── EFO.m                     # Electromagnetic Field Optimization core
-├── sortpop.m, insert_in_pop.m, etc.  # Supporting operations
-├── cec17_func.cpp            # CEC2017 benchmark function source
-├── cec17_func.mexw32 / .mexw64  # Precompiled functions (Windows)
-├── diagram.png               # LEVYEFO-WTMTOA algorithm workflow
-└── input_data/
-    ├── bias_*.txt            # Bias vectors
-    └── M_*_D*.txt            # Rotation matrices
+```bash
+LEVYEFO-WTMTOA/
+├── IMTOA_DP3.m         # Core MTOA implementation
+├── EFO.m               # Electromagnetic field optimization logic
+├── initialization.m    # Initializes population
+├── New_GT.m            # Generates new global trackers
+├── insert_in_pop.m     # Population update strategy
+├── cec17_func.cpp      # CEC benchmark function (requires MEX)
+├── diagram.png         # Algorithm schematic diagram
+├── README.md
 ```
 
 ---
 
-## 📊 Benchmark Settings
+## ⚙️ Requirements
 
-- **Benchmark Suite**: CEC2018  
-- **Problem Dimensions**: 50, 100  
-- **Applications**:  
-  - Spring Design Optimization  
-  - Welded Beam Design  
-- **Average Performance Gain**: Up to **20% improvement** in mean error  
-- **Maximum Cost Reduction**:  
-  - Spring: **31.03%**  
-  - Welded Beam: **32.15%**
+- MATLAB R2020b or later
+- Compiler for MEX files (Windows: Visual Studio, Linux/macOS: GCC)
+- CEC2018 Benchmark Suite setup (included: `cec17_func.cpp`)
 
 ---
 
 ## ▶️ How to Run
 
-### Prerequisites
-- MATLAB R2015 or newer
-- Windows (32/64-bit) recommended for precompiled `.mex` files
-
-### Steps
-
-1. Open MATLAB
-2. Add the project directory to the MATLAB path
-3. Run the main script:
+1. Open `IMTOA_DP3.m` or `EFO.m` in MATLAB.
+2. Ensure MEX files are compiled:
    ```matlab
-   IMTOA_DP3
+   mex cec17_func.cpp
+   ```
+3. Run the hybrid optimization:
+   ```matlab
+   LEVYEFO_WTMTOA()
    ```
 
-Optional: Compile the benchmark functions manually:
-
-```matlab
-mex cec17_func.cpp -DWINDOWS
-```
+4. To test on:
+   - **CEC2018 functions**: execute `IMTOA_DP3.m`
+   - **Engineering problems**: modify target function in `EFO.m`
 
 ---
 
-## 🖼️ Algorithm Diagram
+## 📊 Benchmark & Case Study Results
 
-![LEVYEFO-WTMTOA Algorithm Flow](diagram.png)
+- 🚀 **CEC2018**: Avg. 20–34% mean error improvement over EFO, MTOA, GSA, COA, MEFO, and MVOLevy
+- 🛠️ **Spring Design**: Max. cost reduction of 31.03%
+- 🏗️ **Welded Beam**: Cost improvement of 32.15%
 
 ---
 
-## 📌 Citation
+## 🧾 Citation
 
-If you use this code, please cite:
+If you use this code or algorithm in your work, please cite:
 
 ```bibtex
-@article{safi2025levy,
+@article{SafiEsfahani2025LEVYEFO,
   title={LEVYEFO-WTMTOA: the hybrid of the multi-tracker optimization algorithm and the electromagnetic field optimization},
   author={Safi-Esfahani, Faramarz and Mohammadhoseini, Leili and Larian, Habib and Mirjalili, Seyedali},
   journal={The Journal of Supercomputing},
+  volume={81},
+  number={432},
   year={2025},
   publisher={Springer},
   doi={10.1007/s11227-024-06856-6}
@@ -101,19 +100,21 @@ If you use this code, please cite:
 
 ---
 
-## 🛠️ Future Work
+## 👨‍🔬 Authors
 
-Planned extensions include:
-
-- Enhanced exploration with MIGO or hybridized EFO variants  
-- Real-world applications in cloud task scheduling and neural network training  
-- Comparative analysis with computational cost breakdowns  
-- Evaluation on high-dimensional benchmarks like TEAM
+- **Faramarz Safi-Esfahani** — University of Technology Sydney (Corresponding Author)  
+- **Leili Mohammadhoseini**, **Habib Larian** — Islamic Azad University, Iran  
+- **Seyedali Mirjalili** — Torrens University Australia
 
 ---
 
-## 📃 License
+## 📬 Contact
 
-MIT License or as specified by the authors.
+For questions, please contact:  
+📧 faramarz.safi@yahoo.com
 
 ---
+
+## 📘 License
+
+This project is released for academic research purposes. Please cite the paper if used in any publication or project.
